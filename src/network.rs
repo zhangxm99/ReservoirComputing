@@ -96,17 +96,17 @@ impl Network {
     //训练读出网络
     pub fn train(&mut self,pred:i32,real:i32){
         if real == 1{
-            self.w[0] += 1.0;
+            self.w[0] += 2.0;
         } else{
-            self.w[0] -= 1.0;
+            self.w[0] -= 2.0;
         }
         let mut i = 1;
         for (x,y) in self.choosen.clone(){
             let val = self.r.matrix[x][y].isspike as i32;
             if val == real{
-                self.w[i] += 1.0;
+                self.w[i] += 2.0;
             } else{
-                self.w[i] -= 1.0;
+                self.w[i] -= 2.0;
             }
             i += 1;
         }
