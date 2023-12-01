@@ -1,4 +1,5 @@
 use rand::Rng;
+use crate::param::*;
 
 #[derive(Debug)]
 pub struct Neuron{
@@ -9,7 +10,7 @@ pub struct Neuron{
     //阈值
     threshold:f32,
     //输入权重,正是加强，负是抑制
-    w: [[f32;30];30],
+    w: [[f32;Width];Height],
     //输出连接神经元坐标
     nexts: Vec<(usize,usize)>
 }
@@ -22,7 +23,7 @@ impl Neuron{
             v:0.0,
             isspike:false,
             threshold,
-            w:[[1.0;30];30],
+            w:[[1.0;Width];Height],
             nexts: Vec::new()
         }
     }
@@ -44,7 +45,7 @@ impl Neuron{
         // }
     }
     fn leak(&mut self){
-        self.v *= 0.8;
+        self.v *= 0.75;
     }
 }
 

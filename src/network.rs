@@ -1,7 +1,8 @@
 use crate::reservoir::Reservoir;
+use crate::param::*;
 
 pub struct Network{
-    r: Reservoir::<30,30>,
+    r: Reservoir::<Height,Width>,
     choosen :Vec<(usize,usize)>,
     w:Vec<f32>,
     l:usize
@@ -10,8 +11,8 @@ impl Network {
     pub fn new() -> Self{
         // let choosen = vec![(0,1),(0,3),(0,2),(0,15),(0,19),(3,13),(3,1),(6,14),(7,24),(11,11),(11,2),(13,2),(18,3),(24,7),(24,9),(28,15),(28,20)];
         let mut choosen = Vec::<(usize,usize)>::new();
-        for i in 0..30{
-            for j in 0..30{
+        for i in 0..Height{
+            for j in 0..Width{
                 choosen.push((i,j));
             }
         }
@@ -26,8 +27,8 @@ impl Network {
     //编码层，将输入编码为多神经元脉冲送入库中，这里送入是随机选的
     fn encode(input:i32) -> Vec::<((usize,usize),i32)>{
         let mut v:Vec<((usize,usize),i32)> = Vec::new();
-        for i in 0..30{
-            for j in 0..30{
+        for i in 0..Height{
+            for j in 0..Width{
                 v.push(((i as usize,j as usize),0));
             }
         }
@@ -54,20 +55,7 @@ impl Network {
     }
     //接受输入，返回输出，是整个网络的对外接口
     pub fn input(&mut self,i:i32) -> i32{
-        // match i{
-        //     1 => {
-        //         for i in 0..4{
-        //             self.r.input_spike_train(Self::encode(1));
-        //         }
-        //     }
-        //     0 => {
-        //         for i in 0..2{
-        //             self.r.input_spike_train(Self::encode(1));
-        //         }
-        //     }
-        //     _ => ()
-        // }
-        // self.r.input_spike_train(Self::encode(i));
+
         match i{
             1 => {
                 self.r.input_spike_train(Self::encode(1));

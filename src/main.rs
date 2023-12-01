@@ -1,5 +1,6 @@
 mod network;
 mod reservoir;
+mod param;
 
 fn main() {
     let mut lsm = network::Network::new();
@@ -17,8 +18,8 @@ fn main() {
         }
         lsm.clean_spike();
         pred = lsm.input(i);
-        // println!("got{},pred{}",i,pred);
-        if ith % 100 == 0{println!("{}",mis as f32/sum as f32);}
+        println!("got{},pred{}",i,pred);
+        // if ith % 100 == 0{println!("{}",mis as f32/sum as f32);}
 
     }
 }
