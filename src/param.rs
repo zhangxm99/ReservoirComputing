@@ -1,2 +1,2 @@
-pub const Width:usize = 40;
-pub const Height:usize = 10;
+pub const Width:usize = 15;
+pub const Height:usize = 15;

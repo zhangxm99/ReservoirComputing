@@ -17,7 +17,7 @@ pub struct Neuron{
 impl Neuron{
     fn new() -> Neuron{
         let mut rng = rand::thread_rng();
-        let threshold = rng.gen_range(1.0..18.0);
+        let threshold = rng.gen_range(1.0..14.0);
 
         Self{
             v:0.0,
@@ -82,7 +82,7 @@ impl<const H:usize,const W:usize> Reservoir<H,W>{
                         // println!("{}",p);
                         if rng.gen_range(0.0..1.0) <= p {
                             matrix[i1][j1].nexts.push((i2,j2));
-                            matrix[i2][j2].w[i1][i2] = rng.gen_range(-1.0..4.0);
+                            matrix[i2][j2].w[i1][i2] = rng.gen_range(-0.2..4.0);
                         }
 
                     }

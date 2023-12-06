@@ -46,7 +46,7 @@ impl Network {
         let mut res = self.w[0];
         let mut i = 1;
         for (x,y) in self.choosen.clone(){
-            let val = self.r.matrix[x][y].isspike as i32 as f32;
+            let val = self.r.matrix[x][y].v;
             res += val * self.w[i];
             i+=1;
         }
@@ -71,7 +71,7 @@ impl Network {
         }
         // for i in 0..30{
         //     for j in 0..30{
-        //         print!("{} ",self.r.matrix[i][j].isspike as i32);
+        //         print!("{} ",self.r.matrix[i][j].v);
         //     }
         //     print!("\n");
         // }
@@ -83,21 +83,34 @@ impl Network {
     }
     //训练读出网络
     pub fn train(&mut self,pred:i32,real:i32){
-        if real == 1{
-            self.w[0] += 2.0;
-        } else{
-            self.w[0] -= 2.0;
-        }
+        self.w[0] += (if real == 1{1}else{-1}) as f32 * 2.0;
         let mut i = 1;
         for (x,y) in self.choosen.clone(){
-            let val = self.r.matrix[x][y].isspike as i32;
-            if val == real{
-                self.w[i] += 2.0;
-            } else{
-                self.w[i] -= 2.0;
-            }
+            let val = self.r.matrix[x][y].v;
+            // if val == real{
+            //     self.w[i] += 2.0;
+            // } else{
+            //     self.w[i] -= 2.0;
+            // }
+            self.w[i] += (if real == 1{1}else{-1}) as f32 * val * 2.0;
             i += 1;
         }
-        // println!("{:?}",self.w);
+
+        // if real == 1{
+        //     self.w[0] += 2.0;
+        // } else{
+        //     self.w[0] -= 2.0;
+        // }
+        // let mut i = 1;
+        // for (x,y) in self.choosen.clone(){
+        //     let val = self.r.matrix[x][y].isspike as i32;
+        //     if val == real{
+        //         self.w[i] += 2.0;
+        //     } else{
+        //         self.w[i] -= 2.0;
+        //     }
+        //     i += 1;
+        // }
+
     }
 }
